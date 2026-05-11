@@ -1,4 +1,4 @@
-# ⚽ Sports Blog
+# ⚽ Colunista Com Escoliose
 
 Blog esportivo fullstack com React, Node.js/Express e PostgreSQL.
 
