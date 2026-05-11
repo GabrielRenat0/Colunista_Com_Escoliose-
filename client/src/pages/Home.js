@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard';
 import { postsService } from '../services/api';
 
-const CATEGORIES = ['Todos', 'Futebol', 'Basquete', 'Automobilismo', 'Tênis', 'Geral'];
+const CATEGORIES = ['Todos', 'Futebol', 'Basquete', 'Automobilismo', 'Tênis', 'MMA', 'Futebol Americano', 'Geral'];
 
 export default function Home() {
   const [posts, setPosts]           = useState([]);
@@ -42,8 +42,8 @@ export default function Home() {
     <div className="container" style={{ paddingTop: '2.5rem', paddingBottom: '4rem' }}>
       {/* Hero */}
       <header style={styles.hero}>
-        <h1 style={styles.heroTitle}>⚡ Sports<span style={{ color: 'var(--accent)' }}>Blog</span></h1>
-        <p style={styles.heroSub}>As melhores notícias do mundo esportivo</p>
+      <h1 style={styles.heroTitle}>📰 Colunista<span style={{ color: 'var(--accent)' }}> com Escoliose</span></h1>
+      <p style={styles.heroSub}>As melhores notícias do mundo esportivo</p>
       </header>
 
       {/* Filtro de categorias */}

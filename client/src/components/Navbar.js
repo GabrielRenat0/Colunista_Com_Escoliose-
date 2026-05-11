@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="container" style={styles.inner}>
         {/* Logo */}
         <Link to="/" style={styles.logo}>
-          <span style={styles.logoAccent}>⚡</span> SPORTS<span style={styles.logoBlog}>BLOG</span>
+          <span style={styles.logoAccent}>📰</span> COLUNISTA<span style={styles.logoBlog}> COM ESCOLIOSE</span>
         </Link>
 
         {/* Links desktop */}

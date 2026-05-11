@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postsService } from '../services/api';
 
-const CATEGORIES = ['Futebol', 'Basquete', 'Automobilismo', 'Tênis', 'Vôlei', 'Natação', 'Geral'];
+const CATEGORIES = ['Futebol', 'Basquete', 'Automobilismo', 'Tênis', 'MMA', 'Futebol Americano', 'Vôlei', 'Natação', 'Geral'];
 
 export default function NewPost() {
   const navigate = useNavigate();
