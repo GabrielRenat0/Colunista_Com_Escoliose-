@@ -11,6 +11,7 @@ export default function Navbar() {
   function handleLogout() {
     logout();
     navigate('/');
+    setMenuOpen(false);
   }
 
   return (
@@ -18,55 +19,53 @@ export default function Navbar() {
       <div className="container" style={styles.inner}>
         {/* Logo */}
         <Link to="/" style={styles.logo}>
-          <span style={styles.logoAccent}>📰</span> COLUNISTA<span style={styles.logoBlog}> COM ESCOLIOSE</span>
+          📰 <span>COLUNISTA</span><span style={styles.logoBlog}> COM ESCOLIOSE</span>
         </Link>
 
-        {/* Links desktop */}
-        <div style={styles.links}>
-          <Link to="/" style={{
-            ...styles.link,
-            ...(location.pathname === '/' ? styles.linkActive : {})
-          }}>Home</Link>
-
+        {/* Links desktop - usa classe CSS para esconder no mobile */}
+        <div className="nav-desktop-links" style={styles.links}>
+          <Link to="/" style={location.pathname === '/' ? styles.linkActive : styles.link}>Home</Link>
           {user ? (
             <>
-              <Link to="/new-post" className="btn btn-primary" style={{ fontSize: '0.85rem' }}>
-                + Novo Post
-              </Link>
+              <Link to="/new-post" className="btn btn-primary" style={{ fontSize: '0.85rem' }}>+ Novo Post</Link>
               <span style={styles.userName}>Olá, {user.name.split(' ')[0]}</span>
-              <button onClick={handleLogout} className="btn btn-outline" style={{ fontSize: '0.85rem' }}>
-                Sair
-              </button>
+              <button onClick={handleLogout} className="btn btn-outline" style={{ fontSize: '0.85rem' }}>Sair</button>
             </>
           ) : (
             <>
-              <Link to="/login"    className="btn btn-outline"  style={{ fontSize: '0.85rem' }}>Entrar</Link>
-              <Link to="/register" className="btn btn-primary"  style={{ fontSize: '0.85rem' }}>Cadastrar</Link>
+              <Link to="/login"    className="btn btn-outline" style={{ fontSize: '0.85rem' }}>Entrar</Link>
+              <Link to="/register" className="btn btn-primary" style={{ fontSize: '0.85rem' }}>Cadastrar</Link>
             </>
           )}
         </div>
 
-        {/* Mobile menu button */}
+        {/* Botão hamburguer - usa classe CSS para mostrar no mobile */}
         <button
-          style={styles.menuBtn}
+          className="nav-menu-btn"
           onClick={() => setMenuOpen(o => !o)}
           aria-label="Menu"
-        >☰</button>
+          style={styles.menuBtn}
+        >
+          {menuOpen ? '✕' : '☰'}
+        </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Menu mobile drawer */}
       {menuOpen && (
         <div style={styles.drawer}>
-          <Link to="/"          style={styles.drawerLink} onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/" style={styles.drawerLink} onClick={() => setMenuOpen(false)}>Home</Link>
           {user ? (
             <>
               <Link to="/new-post" style={styles.drawerLink} onClick={() => setMenuOpen(false)}>+ Novo Post</Link>
-              <button onClick={() => { handleLogout(); setMenuOpen(false); }} style={styles.drawerBtn}>Sair</button>
+              <span style={{ ...styles.drawerLink, color: 'var(--muted)', fontSize: '0.85rem' }}>
+                Olá, {user.name}
+              </span>
+              <button onClick={handleLogout} style={styles.drawerBtn}>Sair</button>
             </>
           ) : (
             <>
               <Link to="/login"    style={styles.drawerLink} onClick={() => setMenuOpen(false)}>Entrar</Link>
-              <Link to="/register" style={styles.drawerLink} onClick={() => setMenuOpen(false)}>Cadastrar</Link>
+              <Link to="/register" style={{ ...styles.drawerLink, color: 'var(--accent)' }} onClick={() => setMenuOpen(false)}>Cadastrar</Link>
             </>
           )}
         </div>
@@ -88,32 +87,32 @@ const styles = {
   },
   logo: {
     fontFamily: 'var(--font-display)',
-    fontSize: '1.8rem',
+    fontSize: 'clamp(1rem, 3.5vw, 1.6rem)',
     letterSpacing: '0.05em',
     color: 'var(--white)',
   },
-  logoAccent: { color: 'var(--accent)' },
-  logoBlog: { color: 'var(--accent)', marginLeft: '0.1em' },
+  logoBlog: { color: 'var(--accent)' },
   links: { display: 'flex', alignItems: 'center', gap: '1rem' },
   link: { color: 'var(--muted)', fontSize: '0.9rem', transition: 'color 0.2s' },
-  linkActive: { color: 'var(--white)' },
+  linkActive: { color: 'var(--white)', fontSize: '0.9rem' },
   userName: { fontSize: '0.85rem', color: 'var(--muted)' },
   menuBtn: {
-    display: 'none',
     background: 'none',
     color: 'var(--white)',
     fontSize: '1.5rem',
-    '@media (max-width: 600px)': { display: 'block' },
+    cursor: 'pointer',
+    padding: '0.25rem 0.5rem',
+    border: 'none',
   },
   drawer: {
-    display: 'flex', flexDirection: 'column', gap: '0.5rem',
+    display: 'flex', flexDirection: 'column', gap: '0.25rem',
     padding: '1rem 1.5rem',
     borderTop: '1px solid #1f1f1f',
     background: '#111',
   },
-  drawerLink: { color: 'var(--white)', padding: '0.5rem 0', fontSize: '1rem' },
+  drawerLink: { color: 'var(--white)', padding: '0.6rem 0', fontSize: '1rem', display: 'block' },
   drawerBtn: {
     background: 'none', color: 'var(--accent)',
-    fontSize: '1rem', textAlign: 'left', padding: '0.5rem 0',
+    fontSize: '1rem', textAlign: 'left', padding: '0.6rem 0', cursor: 'pointer', border: 'none',
   },
 };
